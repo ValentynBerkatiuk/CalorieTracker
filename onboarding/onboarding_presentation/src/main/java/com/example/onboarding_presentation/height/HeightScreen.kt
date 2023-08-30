@@ -66,8 +66,7 @@ fun HeightScreen(
         ActionButton(
             text = stringResource(id = R.string.next),
             onClick = viewModel::onNextClick,
-            modifier = Modifier.align(Alignment.BottomEnd),
-            isEnabled = true
+            modifier = Modifier.align(Alignment.BottomEnd)
         )
     }
 }

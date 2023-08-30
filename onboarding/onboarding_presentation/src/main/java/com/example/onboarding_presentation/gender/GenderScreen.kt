@@ -86,7 +86,6 @@ fun GenderScreen(
             text = stringResource(id = R.string.next),
             onClick = genderViewModel::onNextClick,
             modifier = Modifier.align(Alignment.BottomEnd),
-            isEnabled = true
         )
     }
 }

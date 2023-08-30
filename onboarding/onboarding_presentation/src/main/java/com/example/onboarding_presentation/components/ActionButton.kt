@@ -23,12 +23,11 @@ fun ActionButton(
         onClick = onClick,
         modifier = modifier,
         enabled = isEnabled,
-        shape = RoundedCornerShape(50.dp)
+        shape = RoundedCornerShape(100.dp)
     ) {
         Text(
             text = text,
             style = textStyle,
-            color = MaterialTheme.colors.onPrimary,
             modifier = Modifier.padding(LocalSpacing.current.spaceSmall)
         )
     }

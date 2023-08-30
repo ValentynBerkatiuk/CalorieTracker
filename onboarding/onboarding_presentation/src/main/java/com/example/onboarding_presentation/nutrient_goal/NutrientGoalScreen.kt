@@ -74,7 +74,7 @@ fun NutrientGoalScreen(
                 onValueChange = {
                     viewModel.onEvent(NutrientGoalEvent.OnFatRatioEnter(it))
                 },
-                unit = stringResource(id = R.string.next)
+                unit = stringResource(id = R.string.percent_fats)
             )
         }
         ActionButton(

@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TrackedOverviewViewModel @Inject constructor(
+class TrackerOverviewViewModel @Inject constructor(
     preferences: Preferences,
     private val trackerUseCases: TrackerUseCases
 ): ViewModel() {

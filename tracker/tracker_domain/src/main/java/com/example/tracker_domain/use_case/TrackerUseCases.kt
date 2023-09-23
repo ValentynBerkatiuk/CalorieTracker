@@ -6,6 +6,4 @@ data class TrackerUseCases(
     val getFoodsForDate: GetFoodsForDate,
     val searchFood: SearchFood,
     val trackFood: TrackFood
-) {
-
-}
+)

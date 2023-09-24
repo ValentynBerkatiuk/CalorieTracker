@@ -1,6 +1,5 @@
 package com.example.onboarding_presentation.gender
 
-import android.inputmethodservice.Keyboard
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

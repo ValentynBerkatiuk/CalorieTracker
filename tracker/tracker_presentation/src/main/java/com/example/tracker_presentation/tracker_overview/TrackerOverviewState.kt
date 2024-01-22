@@ -14,6 +14,7 @@ data class TrackerOverviewState(
     val caloriesGoal: Int = 0,
     val date: LocalDate = LocalDate.now(),
     val trackedFoods: List<TrackedFood> = emptyList(),
-    val meals: List<Meal> = defaultMeals
+    val meals: List<Meal> = defaultMeals,
+    val isMenuExposed: Boolean = false
 )
 

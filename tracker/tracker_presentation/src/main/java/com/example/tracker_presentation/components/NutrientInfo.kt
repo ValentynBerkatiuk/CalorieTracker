@@ -17,9 +17,9 @@ fun NutrientInfo(
     amount: Int,
     unit: String,
     modifier: Modifier = Modifier,
-    amountTextSize: TextUnit = 20.sp,
+    amountTextSize: TextUnit = 16.sp,
     amountColor: Color = MaterialTheme.colors.onBackground,
-    unitTextSize: TextUnit = 14.sp,
+    unitTextSize: TextUnit = 10.sp,
     unitColor: Color = MaterialTheme.colors.onBackground,
     nameTextStyle: TextStyle = MaterialTheme.typography.body1
 ) {

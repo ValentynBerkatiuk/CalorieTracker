@@ -11,12 +11,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,30 +34,53 @@ import com.example.core_ui.FatColor
 import com.example.core_ui.LocalSpacing
 import com.example.core_ui.ProteinColor
 import com.example.tracker_presentation.components.UnitDisplay
+import com.example.tracker_presentation.tracker_overview.TrackerOverviewEvent
 import com.example.tracker_presentation.tracker_overview.TrackerOverviewState
+import com.example.tracker_presentation.tracker_overview.TrackerOverviewViewModel
 
 @Composable
 fun NutrientsHeader(
-    state: TrackerOverviewState,
+    viewModel: TrackerOverviewViewModel,
     modifier:Modifier = Modifier
 ) {
+    val state = viewModel.state
     val spacing = LocalSpacing.current
     val animatedCalorieCount = animateIntAsState(targetValue = state.totalCalories)
     Column(
-        modifier =
-        modifier.fillMaxWidth()
+        modifier = modifier
+            .fillMaxWidth()
             .clip(
                 RoundedCornerShape(
-                    bottomEnd = 50.dp,
-                    bottomStart = 50.dp
+                    bottomEnd = 60.dp,
+                    bottomStart = 60.dp
                 )
             )
             .background(MaterialTheme.colors.primary)
-            .padding(
-                horizontal = spacing.spaceLarge,
-                vertical = spacing.spaceExtraLarge
-            )
+            .padding(horizontal = spacing.spaceMoreMedium)
     ) {
+        IconButton(
+            onClick = {
+                viewModel.onEvent(TrackerOverviewEvent.onMenuExposed)
+            },
+            modifier = Modifier.padding(top = 14.dp)
+        ) {
+            Icon(
+                Icons.Filled.Menu,
+                contentDescription = "Settings",
+                tint = Color.White
+            )
+        }
+        DropdownMenu(
+            expanded = state.isMenuExposed,
+            onDismissRequest = {
+                viewModel.onEvent(TrackerOverviewEvent.onMenuExposed)
+            }) {
+            DropdownMenuItem(
+                onClick = { /* Handle settings! */
+                }) {
+                Text("Settings")
+            }
+        }
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
@@ -58,7 +89,7 @@ fun NutrientsHeader(
                 amount = animatedCalorieCount.value,
                 unit = stringResource(id = R.string.kcal),
                 amountTextColor = MaterialTheme.colors.onPrimary,
-                amountTextSize = 40.sp,
+                amountTextSize = 36.sp,
                 unitColor = MaterialTheme.colors.onPrimary,
                 modifier = Modifier.align(Alignment.Bottom)
             )
@@ -69,10 +100,10 @@ fun NutrientsHeader(
                     color = MaterialTheme.colors.onPrimary
                 )
                 UnitDisplay(
-                    amount = state.caloriesGoal,
+                    amount = viewModel.state.caloriesGoal,
                     unit = stringResource(id = R.string.kcal),
                     amountTextColor = MaterialTheme.colors.onPrimary,
-                    amountTextSize = 40.sp,
+                    amountTextSize = 36.sp,
                     unitColor = MaterialTheme.colors.onPrimary,
                 )
             }
@@ -84,7 +115,7 @@ fun NutrientsHeader(
             fat = state.totalFat,
             calories = state.totalCalories,
             calorieGoal = state.caloriesGoal,
-            modifier = Modifier
+            modifier
                 .fillMaxWidth()
                 .height(30.dp)
         )
@@ -115,5 +146,6 @@ fun NutrientsHeader(
                 modifier = Modifier.size(90.dp)
             )
         }
+        Spacer(modifier = modifier.height(spacing.spaceLarge))
     }
 }

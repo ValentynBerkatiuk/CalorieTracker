@@ -44,7 +44,7 @@ fun TrackerBarInfo(
                 value / goal.toFloat()
             } else 0f,
             animationSpec = tween(
-                durationMillis = 300
+                durationMillis = 400
             )
         )
     }

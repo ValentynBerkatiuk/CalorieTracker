@@ -63,7 +63,7 @@ fun ExpandableMeal(
                 ) {
                     Text(
                         text = meal.name.asString(context),
-                        style = MaterialTheme.typography.h3
+                        style = MaterialTheme.typography.h4
                     )
                     Icon(
                         imageVector = if(meal.isExpanded) {
@@ -82,7 +82,7 @@ fun ExpandableMeal(
                     UnitDisplay(
                         amount = meal.calories,
                         unit = stringResource(id = R.string.kcal),
-                        amountTextSize = 30.sp
+                        amountTextSize = 18.sp
                     )
                     Row {
                         NutrientInfo(

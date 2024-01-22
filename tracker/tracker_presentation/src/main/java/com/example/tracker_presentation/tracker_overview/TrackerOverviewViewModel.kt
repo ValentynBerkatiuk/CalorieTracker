@@ -63,6 +63,9 @@ class TrackerOverviewViewModel @Inject constructor(
                     }
                 )
             }
+            is TrackerOverviewEvent.onMenuExposed -> {
+                state = state.copy(isMenuExposed = !state.isMenuExposed)
+            }
         }
     }
 

@@ -3,6 +3,7 @@ package com.example.tracker_presentation.tracker_overview
 import com.example.tracker_domain.model.TrackedFood
 
 sealed class TrackerOverviewEvent {
+    object onMenuExposed: TrackerOverviewEvent()
     object onPreviousDayClick: TrackerOverviewEvent()
     object onNextDayClick: TrackerOverviewEvent()
     data class onToggleMealClick(val meal: Meal): TrackerOverviewEvent()

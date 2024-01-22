@@ -36,8 +36,8 @@ fun TrackerOverviewScreen(
             .padding(bottom = spacing.spaceMedium)
     ) {
         item {
-            NutrientsHeader(state = state)
-            Spacer(modifier = Modifier.height(spacing.spaceMedium))
+            NutrientsHeader(viewModel = viewModel)
+            Spacer(modifier = Modifier.height(spacing.spaceSmall))
             DaySelector(
                 date = state.date,
                 onPreviousDayClick = {
@@ -48,7 +48,7 @@ fun TrackerOverviewScreen(
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = spacing.spaceMedium)
+                    .padding(horizontal = spacing.spaceSmall)
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
         }
@@ -62,7 +62,7 @@ fun TrackerOverviewScreen(
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = spacing.spaceSmall)
+                            .padding(horizontal = spacing.spaceExtraSmall)
                     ) {
                         val foods = state.trackedFoods.filter {
                             it.mealType == meal.mealType
@@ -77,7 +77,7 @@ fun TrackerOverviewScreen(
                                     )
                                 }
                             )
-                            Spacer(modifier = Modifier.height(spacing.spaceMedium))
+                            Spacer(modifier = Modifier.height(spacing.spaceSmall))
                         }
                         AddButton(
                             text = stringResource(

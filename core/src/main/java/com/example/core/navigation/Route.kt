@@ -11,6 +11,5 @@ object Route {
     const val GOAL = "goal"
 
     const val TRACKER_OVERVIEW = "tracker_overview"
-    const val TRACKER_SEARCH = "tracker_search"
-    const val SEARCH = "search"
+    const val SEARCH = "tracker_search"
 }

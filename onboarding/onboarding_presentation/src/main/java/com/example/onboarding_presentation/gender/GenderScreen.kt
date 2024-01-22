@@ -28,14 +28,14 @@ import com.example.onboarding_presentation.components.SelectableButton
 
 @Composable
 fun GenderScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     genderViewModel: GenderViewModel = hiltViewModel()
-){
+) {
     val spacing = LocalSpacing.current
     LaunchedEffect(key1 = true) {
         genderViewModel.uiEvent.collect { event ->
             when(event){
-                is UiEvent.Navigate -> onNavigate(event)
+                is UiEvent.Success -> onNextClick()
                 else -> Unit
             }
         }

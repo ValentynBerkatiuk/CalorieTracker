@@ -39,14 +39,14 @@ class HeightViewModel @Inject constructor(
         viewModelScope.launch {
             val heightNumber = height.toIntOrNull() ?: kotlin.run {
                 _uiEvent.send(
-                    UiEvent.ShowSnackBar(
+                    UiEvent.ShowSnackbar(
                        UIText.StringResource(R.string.error_height_cant_be_empty)
                     )
                 )
                 return@launch
             }
             preferences.saveHeight(heightNumber)
-            _uiEvent.send(UiEvent.Navigate(Route.WEIGHT))
+            _uiEvent.send(UiEvent.Success)
         }
     }
 }

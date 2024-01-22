@@ -1,6 +1,6 @@
 package com.example.core.domain.model
 
-sealed class Gender(val gender: String) {
+sealed class Gender(val type: String) {
     object Male: Gender("Male")
     object Female: Gender("Female")
 

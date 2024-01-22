@@ -40,16 +40,18 @@ fun TrackerBarInfo(
     }
     LaunchedEffect(key1 = value) {
         angleRatio.animateTo(
-            targetValue = if (goal>0) {
+            targetValue = if (goal > 0) {
                 value / goal.toFloat()
             } else 0f,
-            animationSpec = tween(300)
+            animationSpec = tween(
+                durationMillis = 300
+            )
         )
     }
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center
-    ){
+    ) {
         Canvas(
             modifier = Modifier
                 .fillMaxWidth()
@@ -66,11 +68,11 @@ fun TrackerBarInfo(
                     cap = StrokeCap.Round
                 )
             )
-            if(value<= goal) {
+            if(value <= goal) {
                 drawArc(
                     color = color,
                     startAngle = 90f,
-                    sweepAngle = 360f,
+                    sweepAngle = 360f * angleRatio.value,
                     useCenter = false,
                     size = size,
                     style = Stroke(
@@ -84,7 +86,8 @@ fun TrackerBarInfo(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            UnitDisplay( amount = value,
+            UnitDisplay(
+                amount = value,
                 unit = stringResource(id = R.string.grams),
                 amountTextColor = if(value <= goal) {
                     MaterialTheme.colors.onPrimary

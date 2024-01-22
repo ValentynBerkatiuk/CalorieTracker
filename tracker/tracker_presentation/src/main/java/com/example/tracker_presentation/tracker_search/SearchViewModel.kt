@@ -23,13 +23,16 @@ class SearchViewModel @Inject constructor(
 ): ViewModel() {
 
     var state by mutableStateOf(SearchState())
-    private set
+        private set
 
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
     fun onEvent(event: SearchEvent) {
         when(event) {
+            is SearchEvent.OnQueryChange -> {
+                state = state.copy(query = event.query)
+            }
             is SearchEvent.OnAmountForFoodChange -> {
                 state = state.copy(
                     trackableFood = state.trackableFood.map {
@@ -39,13 +42,8 @@ class SearchViewModel @Inject constructor(
                     }
                 )
             }
-            is SearchEvent.OnSearchFocusChange -> {
-                state = state.copy(
-                    isHintVisible = !event.isFocused && state.query.isBlank()
-                )
-            }
-            is SearchEvent.OnQueryChange -> {
-                state = state.copy(query = event.query)
+            is SearchEvent.OnSearch -> {
+                executeSearch()
             }
             is SearchEvent.OnToggleTrackableFood -> {
                 state = state.copy(
@@ -56,8 +54,10 @@ class SearchViewModel @Inject constructor(
                     }
                 )
             }
-            is SearchEvent.OnSearch ->{
-                executeSearch()
+            is SearchEvent.OnSearchFocusChange -> {
+                state = state.copy(
+                    isHintVisible = !event.isFocused && state.query.isBlank()
+                )
             }
             is SearchEvent.OnTrackFoodClick -> {
                 trackFood(event)
@@ -85,7 +85,7 @@ class SearchViewModel @Inject constructor(
                 .onFailure {
                     state = state.copy(isSearching = false)
                     _uiEvent.send(
-                        UiEvent.ShowSnackBar(
+                        UiEvent.ShowSnackbar(
                             UIText.StringResource(R.string.error_something_went_wrong)
                         )
                     )

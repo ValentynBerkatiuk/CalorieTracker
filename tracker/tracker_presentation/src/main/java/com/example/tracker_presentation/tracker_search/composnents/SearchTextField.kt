@@ -2,7 +2,7 @@ package com.example.tracker_presentation.tracker_search.composnents
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -22,6 +22,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -37,12 +38,12 @@ fun SearchTextField(
     modifier: Modifier = Modifier,
     hint: String = stringResource(id = R.string.search),
     shouldShowHint: Boolean = false,
-    onFocusChange: (FocusState) -> Unit
+    onFocusChanged: (FocusState) -> Unit
 ) {
     val spacing = LocalSpacing.current
     Box(
         modifier = modifier
-    ){
+    ) {
         BasicTextField(
             value = text,
             onValueChange = onValueChange,
@@ -54,7 +55,7 @@ fun SearchTextField(
                 }
             ),
             keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Search
+                imeAction = ImeAction.Search,
             ),
             modifier = Modifier
                 .clip(RoundedCornerShape(5.dp))
@@ -64,10 +65,10 @@ fun SearchTextField(
                     shape = RoundedCornerShape(5.dp)
                 )
                 .background(MaterialTheme.colors.surface)
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(spacing.spaceMedium)
                 .padding(end = spacing.spaceMedium)
-                .onFocusChanged { onFocusChange(it) }
+                .onFocusChanged { onFocusChanged(it) }
         )
         if(shouldShowHint) {
             Text(
@@ -86,7 +87,7 @@ fun SearchTextField(
         ) {
             Icon(
                 imageVector = Icons.Default.Search,
-                contentDescription = stringResource(id =R.string.search)
+                contentDescription = stringResource(id = R.string.search)
             )
         }
     }

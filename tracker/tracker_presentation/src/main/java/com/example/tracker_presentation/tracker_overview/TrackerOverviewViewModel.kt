@@ -27,42 +27,32 @@ class TrackerOverviewViewModel @Inject constructor(
     var state by mutableStateOf(TrackerOverviewState())
         private set
 
-    private val _uiEvent = Channel<UiEvent>()
-    val uiEvent = _uiEvent.receiveAsFlow()
-
     private var getFoodsForDateJob: Job? = null
 
     init {
+        refreshFoods()
         preferences.saveShouldShowOnboarding(false)
     }
 
     fun onEvent(event: TrackerOverviewEvent) {
         when(event) {
-            is TrackerOverviewEvent.onNextDayClick -> {
-                state = state.copy(date = state.date.plusDays(1))
-                refreshFoods()
-            }
-            is TrackerOverviewEvent.onPreviousDayClick -> {
-                state = state.copy(date = state.date.minusDays(1))
-                refreshFoods()
-            }
-            is TrackerOverviewEvent.onAddFoodClick -> {
-                viewModelScope.launch {
-                    _uiEvent.send(
-                        UiEvent.Navigate(
-                        route = Route.SEARCH
-                                + "/${event.meal.mealType.name}"
-                                + "/${state.date.dayOfMonth}"
-                                + "/${state.date.monthValue}"
-                                + "/${state.date.year}"
-                    ))
-                }
-            }
             is TrackerOverviewEvent.onDeleteFoodClick -> {
                 viewModelScope.launch {
                     trackerUseCases.deleteTrackedFood(event.trackedFood)
                     refreshFoods()
                 }
+            }
+            is TrackerOverviewEvent.onNextDayClick -> {
+                state = state.copy(
+                    date = state.date.plusDays(1)
+                )
+                refreshFoods()
+            }
+            is TrackerOverviewEvent.onPreviousDayClick -> {
+                state = state.copy(
+                    date = state.date.minusDays(1)
+                )
+                refreshFoods()
             }
             is TrackerOverviewEvent.onToggleMealClick -> {
                 state = state.copy(

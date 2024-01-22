@@ -39,14 +39,14 @@ class WeightViewModel @Inject constructor(
         viewModelScope.launch {
             val weightNumber = weight.toFloatOrNull() ?: kotlin.run {
                 _uiEvent.send(
-                    UiEvent.ShowSnackBar(
+                    UiEvent.ShowSnackbar(
                        UIText.StringResource(R.string.error_weight_cant_be_empty)
                     )
                 )
                 return@launch
             }
             preferences.saveWeight(weightNumber)
-            _uiEvent.send(UiEvent.Navigate(Route.GOAL))
+            _uiEvent.send(UiEvent.Success)
         }
     }
 }

@@ -5,6 +5,7 @@ plugins {
     kotlin("android")
     id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -78,6 +79,7 @@ dependencies {
     implementation(project(Modules.trackerPresentation))
     implementation(project(Modules.trackerDomain))
     implementation(project(Modules.trackerData))
+    implementation(project(Modules.pushNotificationsPresentation))
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)

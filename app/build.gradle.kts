@@ -1,14 +1,13 @@
-import com.android.build.api.dsl.Packaging
-
 plugins {
     id("com.android.application")
     kotlin("android")
     id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
-    namespace = "com.example.calorietracker"
+    namespace = ProjectConfig.appId
     compileSdk = ProjectConfig.compileSdk
 
     defaultConfig {
@@ -18,18 +17,17 @@ android {
         versionCode = ProjectConfig.versionCode
         versionName = ProjectConfig.versionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = ProjectConfig.JUnitInstrumentationRunner
         vectorDrawables {
             useSupportLibrary = true
         }
     }
 
     buildTypes {
-        getByName("release") {
+        getByName(ProjectConfig.buildFeatureRelease) {
             isMinifyEnabled = false
         }
-        getByName("debug") {
-            applicationIdSuffix = ".debug"
+        getByName(ProjectConfig.buildFeatureDebug) {
             isDebuggable = true
         }
     }
@@ -41,19 +39,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = ProjectConfig.javaVersion
     }
     composeOptions {
         kotlinCompilerExtensionVersion = Compose.composeCompilerVersion
     }
-    fun Packaging.() {
-        resources.excludes.add("META-INF/AL2.0")
-        resources.excludes.add("META-INF/LGPL2.1")
-        resources.excludes.add("**/attach_hotspot_windows.dll")
-        resources.excludes.add("META-INF/licenses/ASM")
-    }
     kotlin {
-        jvmToolchain(17)
+        jvmToolchain(ProjectConfig.javaVersion.toInt())
     }
 }
 
@@ -78,6 +70,7 @@ dependencies {
     implementation(project(Modules.trackerPresentation))
     implementation(project(Modules.trackerDomain))
     implementation(project(Modules.trackerData))
+    implementation(project(Modules.pushNotificationsPresentation))
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)

@@ -8,4 +8,9 @@ dependencies {
     "implementation"(project(Modules.trackerDomain))
 
     "implementation"(Coil.coilCompose)
+
+    "implementation"(platform(Firebase.firebaseBom))
+    "implementation"(Firebase.firebaseMessaging)
+    "implementation"(Firebase.firebaseAnalytics)
+
 }

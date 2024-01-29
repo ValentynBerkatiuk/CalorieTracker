@@ -1,22 +1,14 @@
 package com.example.tracker_presentation.tracker_overview
 
-import android.Manifest
-import android.app.Activity
-import android.content.Context
-import android.content.pm.PackageManager
-import android.os.Build
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.preferences.Preferences
 import com.example.tracker_domain.use_case.TrackerUseCases
 import com.google.firebase.Firebase
-import com.google.firebase.messaging.ktx.messaging
 import com.google.firebase.messaging.messaging
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -50,28 +42,28 @@ class TrackerOverviewViewModel @Inject constructor(
 
     fun onEvent(event: TrackerOverviewEvent) {
         when (event) {
-            is TrackerOverviewEvent.onDeleteFoodClick -> {
+            is TrackerOverviewEvent.OnDeleteFoodClick -> {
                 viewModelScope.launch {
                     trackerUseCases.deleteTrackedFood(event.trackedFood)
                     refreshFoods()
                 }
             }
 
-            is TrackerOverviewEvent.onNextDayClick -> {
+            is TrackerOverviewEvent.OnNextDayClick -> {
                 state = state.copy(
-                    date = state.date.plusDays(1)
+                    date = state.date.plusDays(DAYS_TO_SUBTRACT)
                 )
                 refreshFoods()
             }
 
-            is TrackerOverviewEvent.onPreviousDayClick -> {
+            is TrackerOverviewEvent.OnPreviousDayClick -> {
                 state = state.copy(
-                    date = state.date.minusDays(1)
+                    date = state.date.minusDays(DAYS_TO_SUBTRACT)
                 )
                 refreshFoods()
             }
 
-            is TrackerOverviewEvent.onToggleMealClick -> {
+            is TrackerOverviewEvent.OnToggleMealClick -> {
                 state = state.copy(
                     meals = state.meals.map {
                         if (it.name == event.meal.name) {
@@ -81,7 +73,7 @@ class TrackerOverviewViewModel @Inject constructor(
                 )
             }
 
-            is TrackerOverviewEvent.onMenuExposed -> {
+            is TrackerOverviewEvent.OnMenuExposed -> {
                 state = state.copy(isMenuExposed = !state.isMenuExposed)
             }
         }
@@ -107,10 +99,10 @@ class TrackerOverviewViewModel @Inject constructor(
                         val nutrientsForMeal =
                             nutrientsResult.mealNutrients[it.mealType]
                                 ?: return@map it.copy(
-                                    carbs = 0,
-                                    proteins = 0,
-                                    fats = 0,
-                                    calories = 0
+                                    carbs = DEFAULT_VALUE,
+                                    proteins = DEFAULT_VALUE,
+                                    fats = DEFAULT_VALUE,
+                                    calories = DEFAULT_VALUE
                                 )
                         it.copy(
                             carbs = nutrientsForMeal.carbs,
@@ -122,5 +114,10 @@ class TrackerOverviewViewModel @Inject constructor(
                 )
             }
             .launchIn(viewModelScope)
+    }
+
+    companion object {
+        private const val DAYS_TO_SUBTRACT = 1L
+        private const val DEFAULT_VALUE = 0
     }
 }

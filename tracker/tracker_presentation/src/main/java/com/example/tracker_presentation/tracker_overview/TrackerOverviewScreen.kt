@@ -41,10 +41,10 @@ fun TrackerOverviewScreen(
             DaySelector(
                 date = state.date,
                 onPreviousDayClick = {
-                    viewModel.onEvent(TrackerOverviewEvent.onPreviousDayClick)
+                    viewModel.onEvent(TrackerOverviewEvent.OnPreviousDayClick)
                 },
                 onNextDayClick = {
-                    viewModel.onEvent(TrackerOverviewEvent.onNextDayClick)
+                    viewModel.onEvent(TrackerOverviewEvent.OnNextDayClick)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -56,7 +56,7 @@ fun TrackerOverviewScreen(
             ExpandableMeal(
                 meal = meal,
                 onToggleClick = {
-                    viewModel.onEvent(TrackerOverviewEvent.onToggleMealClick(meal))
+                    viewModel.onEvent(TrackerOverviewEvent.OnToggleMealClick(meal))
                 },
                 content = {
                     Column(
@@ -73,7 +73,7 @@ fun TrackerOverviewScreen(
                                 onDeleteClick = {
                                     viewModel.onEvent(
                                         TrackerOverviewEvent
-                                            .onDeleteFoodClick(food)
+                                            .OnDeleteFoodClick(food)
                                     )
                                 }
                             )

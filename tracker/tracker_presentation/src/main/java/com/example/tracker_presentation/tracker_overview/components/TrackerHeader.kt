@@ -19,7 +19,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,7 +34,6 @@ import com.example.core_ui.LocalSpacing
 import com.example.core_ui.ProteinColor
 import com.example.tracker_presentation.components.UnitDisplay
 import com.example.tracker_presentation.tracker_overview.TrackerOverviewEvent
-import com.example.tracker_presentation.tracker_overview.TrackerOverviewState
 import com.example.tracker_presentation.tracker_overview.TrackerOverviewViewModel
 
 @Composable
@@ -60,7 +58,7 @@ fun NutrientsHeader(
     ) {
         IconButton(
             onClick = {
-                viewModel.onEvent(TrackerOverviewEvent.onMenuExposed)
+                viewModel.onEvent(TrackerOverviewEvent.OnMenuExposed)
             },
             modifier = Modifier.padding(top = 14.dp)
         ) {
@@ -73,7 +71,7 @@ fun NutrientsHeader(
         DropdownMenu(
             expanded = state.isMenuExposed,
             onDismissRequest = {
-                viewModel.onEvent(TrackerOverviewEvent.onMenuExposed)
+                viewModel.onEvent(TrackerOverviewEvent.OnMenuExposed)
             }) {
             DropdownMenuItem(
                 onClick = { /* Handle settings! */

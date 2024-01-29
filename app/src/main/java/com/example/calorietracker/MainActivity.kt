@@ -25,7 +25,6 @@ import com.example.onboarding_presentation.nutrient_goal.NutrientGoalScreen
 import com.example.onboarding_presentation.weight.WeightScreen
 import com.example.onboarding_presentation.welcome.WelcomeScreen
 import com.example.tracker_presentation.tracker_overview.TrackerOverviewScreen
-import com.example.tracker_presentation.tracker_overview.requestNotificationPermission
 import com.example.tracker_presentation.tracker_search.SearchScreen
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -121,7 +120,6 @@ class MainActivity: ComponentActivity() {
                                     )
                                 }
                             )
-                            requestNotificationPermission(this@MainActivity)
                         }
                         composable(
                             route = Route.SEARCH + "/{mealName}/{dayOfMonth}/{month}/{year}",

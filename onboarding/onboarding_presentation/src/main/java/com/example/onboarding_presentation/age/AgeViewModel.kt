@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.calorietracker.R
 import com.example.core.domain.preferences.Preferences
 import com.example.core.domain.use_case.FilterOutDigits
-import com.example.core.navigation.Route
 import com.example.core.util.UIText
 import com.example.core.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,14 +22,14 @@ class AgeViewModel @Inject constructor(
    private val filterOutDigits: FilterOutDigits
 ): ViewModel() {
 
-    var age by mutableStateOf("20")
+    var age by mutableStateOf(AGE_BY_DEFAULT)
         private set
 
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
     fun onAgeEnter(age: String) {
-        if(age.length <= 3){
+        if(age.length <= MINIMUM_LENGTH){
             this.age = filterOutDigits(age)
         }
     }
@@ -48,5 +47,10 @@ class AgeViewModel @Inject constructor(
             preferences.saveAge(ageNumber)
             _uiEvent.send(UiEvent.Success)
         }
+    }
+
+    companion object {
+        private const val AGE_BY_DEFAULT = "20"
+        private const val MINIMUM_LENGTH = 3
     }
 }

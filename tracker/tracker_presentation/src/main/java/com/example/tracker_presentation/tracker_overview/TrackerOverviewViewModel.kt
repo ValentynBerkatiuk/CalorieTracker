@@ -1,21 +1,30 @@
 package com.example.tracker_presentation.tracker_overview
 
+import android.Manifest
+import android.app.Activity
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.preferences.Preferences
-import com.example.core.navigation.Route
-import com.example.core.util.UiEvent
 import com.example.tracker_domain.use_case.TrackerUseCases
+import com.google.firebase.Firebase
+import com.google.firebase.messaging.ktx.messaging
+import com.google.firebase.messaging.messaging
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,37 +41,46 @@ class TrackerOverviewViewModel @Inject constructor(
     init {
         refreshFoods()
         preferences.saveShouldShowOnboarding(false)
+        viewModelScope.launch(Dispatchers.IO) {
+            Firebase.messaging.subscribeToTopic("push_notifications").await()
+            Log.d("push_notifications", Firebase.messaging.token.await())
+        }
+
     }
 
     fun onEvent(event: TrackerOverviewEvent) {
-        when(event) {
+        when (event) {
             is TrackerOverviewEvent.onDeleteFoodClick -> {
                 viewModelScope.launch {
                     trackerUseCases.deleteTrackedFood(event.trackedFood)
                     refreshFoods()
                 }
             }
+
             is TrackerOverviewEvent.onNextDayClick -> {
                 state = state.copy(
                     date = state.date.plusDays(1)
                 )
                 refreshFoods()
             }
+
             is TrackerOverviewEvent.onPreviousDayClick -> {
                 state = state.copy(
                     date = state.date.minusDays(1)
                 )
                 refreshFoods()
             }
+
             is TrackerOverviewEvent.onToggleMealClick -> {
                 state = state.copy(
                     meals = state.meals.map {
-                        if(it.name == event.meal.name) {
+                        if (it.name == event.meal.name) {
                             it.copy(isExpanded = !it.isExpanded)
                         } else it
                     }
                 )
             }
+
             is TrackerOverviewEvent.onMenuExposed -> {
                 state = state.copy(isMenuExposed = !state.isMenuExposed)
             }

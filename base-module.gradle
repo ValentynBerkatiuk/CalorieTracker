@@ -4,7 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
 
 android {
-    namespace 'com.example.calorietracker'
+    namespace ProjectConfig.appId
     compileSdk ProjectConfig.compileSdk
 
     defaultConfig {
@@ -13,8 +13,8 @@ android {
         versionCode ProjectConfig.versionCode
         versionName ProjectConfig.versionName
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
+        testInstrumentationRunner ProjectConfig.JUnitInstrumentationRunner
+        consumerProguardFiles ProjectConfig.consumerRulesPro
     }
     buildTypes {
         release {
@@ -29,10 +29,10 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = ProjectConfig.javaVersion
     }
     kotlin {
-        jvmToolchain(17)
+        jvmToolchain(ProjectConfig.javaVersion.toInteger())
     }
 }
 

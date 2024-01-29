@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
+
+android {
+    namespace ProjectConfig.appPushId
+    compileSdk ProjectConfig.compileSdk
+
+    defaultConfig {
+        minSdk ProjectConfig.minSdk
+        targetSdk ProjectConfig.targetSdk
+        versionCode ProjectConfig.versionCode
+        versionName ProjectConfig.versionName
+
+        testInstrumentationRunner ProjectConfig.JUnitInstrumentationRunner
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+        debug {
+            debuggable true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = ProjectConfig.javaVersion
+    }
+}
+
+dependencies {
+    implementation AndroidX.coreKtx
+
+    implementation platform(Firebase.firebaseBom)
+    implementation Firebase.firebaseMessaging
+    implementation Firebase.firebaseAnalytics
+}

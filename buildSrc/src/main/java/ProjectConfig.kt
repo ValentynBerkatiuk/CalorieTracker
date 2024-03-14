@@ -1,6 +1,7 @@
 object ProjectConfig {
     const val appId = "com.example.calorietracker"
     const val appPushId = "com.example.push_notifications"
+    const val settingsId = "com.example.settings_module"
     const val compileSdk = 34
     const val minSdk = 21
     const val targetSdk = 33

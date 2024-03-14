@@ -1,0 +1,80 @@
+apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    namespace ProjectConfig.settingsId
+    compileSdk ProjectConfig.compileSdk
+
+    defaultConfig {
+        minSdk ProjectConfig.minSdk
+        targetSdk ProjectConfig.targetSdk
+        versionCode ProjectConfig.versionCode
+        versionName ProjectConfig.versionName
+
+        testInstrumentationRunner ProjectConfig.JUnitInstrumentationRunner
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+        debug {
+            debuggable true
+        }
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Compose.composeCompilerVersion
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = ProjectConfig.javaVersion
+    }
+    kotlin {
+        jvmToolchain(ProjectConfig.javaVersion.toInteger())
+    }
+}
+
+dependencies {
+    implementation AndroidX.coreKtx
+    implementation AndroidX.appCompat
+
+    implementation Compose.compiler
+    implementation Compose.ui
+    implementation Compose.uiToolingPreview
+    implementation Compose.hiltNavigationCompose
+    implementation Compose.material
+    implementation Compose.runtime
+    implementation Compose.navigation
+    implementation Compose.viewModelCompose
+    implementation Compose.activityCompose
+    implementation Compose.material3
+
+    testImplementation(Testing.junit4)
+    testImplementation(Testing.junitAndroidExt)
+    testImplementation(Testing.truth)
+    testImplementation(Testing.coroutines)
+    testImplementation(Testing.turbine)
+    testImplementation(Testing.composeUiTest)
+    testImplementation(Testing.mockk)
+    testImplementation(Testing.mockWebServer)
+
+    androidTestImplementation(Testing.junit4)
+    androidTestImplementation(Testing.junitAndroidExt)
+    androidTestImplementation(Testing.truth)
+    androidTestImplementation(Testing.coroutines)
+    androidTestImplementation(Testing.turbine)
+    androidTestImplementation(Testing.composeUiTest)
+    androidTestImplementation(Testing.mockkAndroid)
+    androidTestImplementation(Testing.mockWebServer)
+    androidTestImplementation(Testing.hiltTesting)
+    kaptAndroidTest(DaggerHilt.hiltCompiler)
+    androidTestImplementation(Testing.testRunner)
+}

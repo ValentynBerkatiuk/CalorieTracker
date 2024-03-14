@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -25,7 +25,7 @@ import com.example.onboarding_presentation.components.UnitTextField
 
 @Composable
 fun WeightScreen(
-    scaffoldState: ScaffoldState,
+    snackbarHostState: SnackbarHostState,
     onNextClick: () -> Unit,
     viewModel: WeightViewModel = hiltViewModel()
 ) {
@@ -36,7 +36,7 @@ fun WeightScreen(
             when (event) {
                 is UiEvent.Success -> onNextClick()
                 is UiEvent.ShowSnackbar -> {
-                    scaffoldState.snackbarHostState.showSnackbar(
+                    snackbarHostState.showSnackbar(
                         message = event.message.asString(context)
                     )
                 }
@@ -55,7 +55,7 @@ fun WeightScreen(
         ) {
             Text(
                 text = stringResource(id = R.string.whats_your_weight),
-                style = MaterialTheme.typography.h3
+                style = MaterialTheme.typography.displaySmall
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
             UnitTextField(value = viewModel.weight,

@@ -55,6 +55,7 @@ dependencies {
     implementation(Compose.uiToolingPreview)
     implementation(Compose.hiltNavigationCompose)
     implementation(Compose.material)
+    implementation(Compose.material3)
     implementation(Compose.runtime)
     implementation(Compose.navigation)
     implementation(Compose.viewModelCompose)
@@ -71,6 +72,8 @@ dependencies {
     implementation(project(Modules.trackerDomain))
     implementation(project(Modules.trackerData))
     implementation(project(Modules.pushNotificationsPresentation))
+    implementation(project(Modules.settingsPresentation))
+    implementation(project(Modules.settingsDomain))
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)

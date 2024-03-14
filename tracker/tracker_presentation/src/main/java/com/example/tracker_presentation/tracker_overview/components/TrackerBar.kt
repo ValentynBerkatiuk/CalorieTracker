@@ -2,14 +2,13 @@ package com.example.tracker_presentation.tracker_overview.components
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.Canvas
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
 import com.example.core_ui.CarbColor
 import com.example.core_ui.FatColor
 import com.example.core_ui.ProteinColor
@@ -23,8 +22,8 @@ fun TrackerBar(
     calorieGoal: Int,
     modifier: Modifier = Modifier
 ) {
-    val background = MaterialTheme.colors.background
-    val caloriesExceedColor = MaterialTheme.colors.error
+    val background = MaterialTheme.colorScheme.background
+    val caloriesExceedColor = MaterialTheme.colorScheme.error
     val carbWidthRatio = remember {
         Animatable(0f)
     }

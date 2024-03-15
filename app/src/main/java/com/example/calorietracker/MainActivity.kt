@@ -3,10 +3,16 @@ package com.example.calorietracker
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -24,7 +30,9 @@ import com.example.onboarding_presentation.height.HeightScreen
 import com.example.onboarding_presentation.nutrient_goal.NutrientGoalScreen
 import com.example.onboarding_presentation.weight.WeightScreen
 import com.example.onboarding_presentation.welcome.WelcomeScreen
+import com.example.tracker_presentation.tracker_overview.ThemeViewModel
 import com.example.tracker_presentation.tracker_overview.TrackerOverviewScreen
+import com.example.tracker_presentation.tracker_overview.new_receipt.NewReceiptCameraX
 import com.example.tracker_presentation.tracker_overview.requestNotificationPermission
 import com.example.tracker_presentation.tracker_search.SearchScreen
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,18 +44,21 @@ class MainActivity: ComponentActivity() {
     @Inject
     lateinit var preferences: Preferences
 
+    private val themeViewModel: ThemeViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val shouldShowOnboarding = preferences.loadShouldShowOnboarding()
 
         setContent {
-            CalorieTrackerTheme {
+            var darkTheme by remember { mutableStateOf(themeViewModel.settingsData) }
+            CalorieTrackerTheme(darkTheme = darkTheme) {
                 val navController = rememberNavController()
-                val scaffoldState = rememberScaffoldState()
+                val snackbarHostState = remember { SnackbarHostState() }
                 Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    scaffoldState = scaffoldState
+                    snackbarHost = { SnackbarHost(snackbarHostState) },
+                    modifier = Modifier.fillMaxSize()
                 ) { padding ->
                     NavHost(
                         navController = navController,
@@ -63,7 +74,7 @@ class MainActivity: ComponentActivity() {
                         }
                         composable(Route.AGE) {
                             AgeScreen(
-                                scaffoldState = scaffoldState,
+                                snackbarHostState = snackbarHostState,
                                 onNextClick = {
                                     navController.navigate(Route.HEIGHT)
                                 }
@@ -76,7 +87,7 @@ class MainActivity: ComponentActivity() {
                         }
                         composable(Route.HEIGHT) {
                             HeightScreen(
-                                scaffoldState = scaffoldState,
+                                snackbarHostState = snackbarHostState,
                                 onNextClick = {
                                     navController.navigate(Route.WEIGHT)
                                 }
@@ -84,7 +95,7 @@ class MainActivity: ComponentActivity() {
                         }
                         composable(Route.WEIGHT) {
                             WeightScreen(
-                                scaffoldState = scaffoldState,
+                                snackbarHostState = snackbarHostState,
                                 onNextClick = {
                                     navController.navigate(Route.ACTIVITY)
                                 }
@@ -92,7 +103,7 @@ class MainActivity: ComponentActivity() {
                         }
                         composable(Route.NUTRIENT_GOAL) {
                             NutrientGoalScreen(
-                                scaffoldState = scaffoldState,
+                                snackbarHostState = snackbarHostState,
                                 onNextClick = {
                                     navController.navigate(Route.TRACKER_OVERVIEW)
                                 }
@@ -119,7 +130,15 @@ class MainActivity: ComponentActivity() {
                                                 "/$month" +
                                                 "/$year"
                                     )
-                                }
+                                },
+                                onCreateNewReceipt = {
+                                    navController.navigate(Route.NEW_RECEIPT)
+                                },
+                                onThemeUpdated = {
+                                    darkTheme = !darkTheme
+                                    themeViewModel.updateTheme(darkTheme)
+                                },
+                                darkTheme = darkTheme,
                             )
                             requestNotificationPermission(this@MainActivity)
                         }
@@ -145,7 +164,7 @@ class MainActivity: ComponentActivity() {
                             val month = it.arguments?.getInt("month")!!
                             val year = it.arguments?.getInt("year")!!
                             SearchScreen(
-                                scaffoldState = scaffoldState,
+                                snackbarHostState = snackbarHostState,
                                 mealName = mealName,
                                 dayOfMonth = dayOfMonth,
                                 month = month,
@@ -154,6 +173,9 @@ class MainActivity: ComponentActivity() {
                                     navController.navigateUp()
                                 }
                             )
+                        }
+                        composable(Route.NEW_RECEIPT) {
+                            NewReceiptCameraX()
                         }
                     }
                 }

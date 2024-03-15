@@ -2,10 +2,10 @@ package com.example.tracker_presentation.tracker_overview.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
@@ -36,7 +36,7 @@ fun DaySelector(
         }
         Text(
             text = parseDateText(date = date),
-            style = MaterialTheme.typography.h2
+            style = MaterialTheme.typography.displayMedium
         )
         IconButton(onClick = onNextDayClick) {
             Icon(

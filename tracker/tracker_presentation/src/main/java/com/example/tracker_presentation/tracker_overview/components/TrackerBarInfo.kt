@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -33,8 +33,8 @@ fun TrackerBarInfo(
     modifier: Modifier = Modifier,
     strokeWidth: Dp = 8.dp,
 ) {
-    val background = MaterialTheme.colors.background
-    val goalExceededColor = MaterialTheme.colors.error
+    val background = MaterialTheme.colorScheme.background
+    val goalExceededColor = MaterialTheme.colorScheme.error
     val angleRatio = remember {
         Animatable(0f)
     }
@@ -90,18 +90,18 @@ fun TrackerBarInfo(
                 amount = value,
                 unit = stringResource(id = R.string.grams),
                 amountTextColor = if(value <= goal) {
-                    MaterialTheme.colors.onPrimary
+                    MaterialTheme.colorScheme.onPrimary
                 } else goalExceededColor,
                 unitColor = if(value <= goal) {
-                    MaterialTheme.colors.onPrimary
+                    MaterialTheme.colorScheme.onPrimary
                 } else goalExceededColor
             )
             Text(
                 text = name,
                 color = if(value <= goal) {
-                    MaterialTheme.colors.onPrimary
+                    MaterialTheme.colorScheme.onPrimary
                 } else goalExceededColor,
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Light
             )
         }

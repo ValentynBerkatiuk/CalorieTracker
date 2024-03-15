@@ -9,8 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -52,31 +52,31 @@ fun GenderScreen(
         ) {
             Text(
                 text = stringResource(id = R.string.whats_your_gender),
-                style = MaterialTheme.typography.h3
+                style = MaterialTheme.typography.displaySmall
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
             Row {
                SelectableButton(
                    text = stringResource(id = R.string.male),
                    isSelected = genderViewModel.selectedGender is Gender.Male,
-                   color = MaterialTheme.colors.primaryVariant,
+                   color = MaterialTheme.colorScheme.secondary,
                    selectedTextColor = Color.White,
                    onClick = {
                        genderViewModel.onGenderClick(Gender.Male)
                    },
-                   textStyle = MaterialTheme.typography.button.copy(
+                   textStyle = MaterialTheme.typography.labelLarge.copy(
                        fontWeight = FontWeight.Normal
                    ))
                 Spacer(modifier = Modifier.width(spacing.spaceMedium))
                 SelectableButton(
                     text = stringResource(id = R.string.female),
                     isSelected = genderViewModel.selectedGender is Gender.Female,
-                    color = MaterialTheme.colors.primaryVariant,
+                    color = MaterialTheme.colorScheme.secondary,
                     selectedTextColor = Color.White,
                     onClick = {
                         genderViewModel.onGenderClick(Gender.Female)
                     },
-                    textStyle = MaterialTheme.typography.button.copy(
+                    textStyle = MaterialTheme.typography.labelLarge.copy(
                         fontWeight = FontWeight.Normal
                     ))
             }

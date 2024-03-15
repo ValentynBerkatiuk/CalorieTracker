@@ -137,3 +137,8 @@
 /buildSrc/build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i.len
 /buildSrc/build/classes/kotlin/main/Testing.class
 /.idea/vcs.xml
+/.idea/modules/core-ui/CalorieTracker.core-ui.iml
+/.idea/modules/tracker/tracker_presentation/CalorieTracker.tracker.tracker_presentation.iml
+/buildSrc/build/classes/kotlin/main/DataStore.class
+/.gradle/8.0.1/checksums/md5-checksums.bin
+/.gradle/8.0.1/checksums/sha1-checksums.bin

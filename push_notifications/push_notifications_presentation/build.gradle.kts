@@ -7,8 +7,9 @@ apply {
 
 dependencies {
 
-    "implementation"(DaggerHilt.hiltAndroid)
     "implementation"(project(Modules.pushNotificationsData))
+
+    "implementation"(DaggerHilt.hiltAndroid)
     "kapt"(DaggerHilt.hiltCompiler)
     "implementation"(Coroutine.coroutines)
 

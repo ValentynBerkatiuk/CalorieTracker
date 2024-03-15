@@ -9,14 +9,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.Text
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -32,10 +31,10 @@ import com.example.tracker_presentation.tracker_search.composnents.SearchTextFie
 import com.example.tracker_presentation.tracker_search.composnents.TrackableFoodItem
 import java.time.LocalDate
 
-@OptIn(ExperimentalComposeUiApi::class, ExperimentalCoilApi::class)
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun SearchScreen(
-    scaffoldState: ScaffoldState,
+    snackbarHostState: SnackbarHostState,
     mealName: String,
     dayOfMonth: Int,
     month: Int,
@@ -51,7 +50,7 @@ fun SearchScreen(
         viewModel.uiEvent.collect { event ->
             when (event) {
                 is UiEvent.ShowSnackbar -> {
-                    scaffoldState.snackbarHostState.showSnackbar(
+                    snackbarHostState.showSnackbar(
                         message = event.message.asString(context)
                     )
                     keyboardController?.hide()
@@ -68,7 +67,7 @@ fun SearchScreen(
     ) {
         Text(
             text = stringResource(id = R.string.add_meal, mealName),
-            style = MaterialTheme.typography.h2
+            style = MaterialTheme.typography.displayMedium
         )
         Spacer(modifier = Modifier.height(spacing.spaceMedium))
         SearchTextField(
@@ -122,7 +121,7 @@ fun SearchScreen(
             state.trackableFood.isEmpty() -> {
                 Text(
                     text = stringResource(id = R.string.no_results),
-                    style = MaterialTheme.typography.body1,
+                    style = MaterialTheme.typography.bodyLarge,
                     textAlign = TextAlign.Center
                 )
             }

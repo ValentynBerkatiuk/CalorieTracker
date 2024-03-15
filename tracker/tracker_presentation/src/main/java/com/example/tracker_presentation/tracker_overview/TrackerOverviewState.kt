@@ -15,6 +15,6 @@ data class TrackerOverviewState(
     val date: LocalDate = LocalDate.now(),
     val trackedFoods: List<TrackedFood> = emptyList(),
     val meals: List<Meal> = defaultMeals,
-    val isMenuExposed: Boolean = false
+    val isDarkTheme: Boolean = false
 )
 

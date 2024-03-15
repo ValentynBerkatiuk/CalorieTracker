@@ -9,8 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -52,19 +52,19 @@ fun ActivityScreen(
         ) {
             Text(
                 text = stringResource(id = R.string.whats_your_activity_level),
-                style = MaterialTheme.typography.h3
+                style = MaterialTheme.typography.displaySmall
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
             Row {
                 SelectableButton(
                     text = stringResource(id = R.string.low),
                     isSelected = viewModel.selectedActivityLevel is ActivityLevel.Low,
-                    color = MaterialTheme.colors.primaryVariant,
+                    color = MaterialTheme.colorScheme.secondary,
                     selectedTextColor = Color.White,
                     onClick = {
                         viewModel.onActivityLevelSelect(ActivityLevel.Low)
                     },
-                    textStyle = MaterialTheme.typography.button.copy(
+                    textStyle = MaterialTheme.typography.displaySmall.copy(
                         fontWeight = FontWeight.Normal
                     )
                 )
@@ -72,12 +72,12 @@ fun ActivityScreen(
                 SelectableButton(
                     text = stringResource(id = R.string.medium),
                     isSelected = viewModel.selectedActivityLevel is ActivityLevel.Medium,
-                    color = MaterialTheme.colors.primaryVariant,
+                    color = MaterialTheme.colorScheme.secondary,
                     selectedTextColor = Color.White,
                     onClick = {
                         viewModel.onActivityLevelSelect(ActivityLevel.Medium)
                     },
-                    textStyle = MaterialTheme.typography.button.copy(
+                    textStyle = MaterialTheme.typography.displaySmall.copy(
                         fontWeight = FontWeight.Normal
                     )
                 )
@@ -85,12 +85,12 @@ fun ActivityScreen(
                 SelectableButton(
                     text = stringResource(id = R.string.high),
                     isSelected = viewModel.selectedActivityLevel is ActivityLevel.High,
-                    color = MaterialTheme.colors.primaryVariant,
+                    color = MaterialTheme.colorScheme.secondary,
                     selectedTextColor = Color.White,
                     onClick = {
                         viewModel.onActivityLevelSelect(ActivityLevel.High)
                     },
-                    textStyle = MaterialTheme.typography.button.copy(
+                    textStyle = MaterialTheme.typography.displaySmall.copy(
                         fontWeight = FontWeight.Normal
                     )
                 )

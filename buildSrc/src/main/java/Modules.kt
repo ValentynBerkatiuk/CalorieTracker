@@ -10,6 +10,11 @@ object Modules {
     const val trackerData = ":tracker:tracker_data"
     const val trackerDomain = ":tracker:tracker_domain"
     const val trackerPresentation = ":tracker:tracker_presentation"
+
     const val pushNotificationsPresentation = ":push_notifications:push_notifications_presentation"
     const val pushNotificationsData = ":push_notifications:push_notifications_data"
+
+    const val settingsPresentation = ":settings:settings_presentation"
+    const val settingsDomain = ":settings:settings_domain"
+    const val settingsData = ":settings:settings_data"
 }

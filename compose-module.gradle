@@ -52,6 +52,8 @@ dependencies {
     implementation Compose.navigation
     implementation Compose.viewModelCompose
     implementation Compose.activityCompose
+    implementation Google.material3
+    implementation Google.materialIcons
 
     kapt DaggerHilt.hiltCompiler
     implementation DaggerHilt.hiltAndroid

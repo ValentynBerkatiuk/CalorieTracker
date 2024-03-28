@@ -106,7 +106,7 @@ fun ExpandableMeal(
                 }
             }
         }
-        Spacer(modifier = Modifier.height(spacing.spaceMedium))
+        Spacer(modifier = Modifier.height(spacing.spaceSmall))
         AnimatedVisibility(visible = meal.isExpanded) {
             content()
         }

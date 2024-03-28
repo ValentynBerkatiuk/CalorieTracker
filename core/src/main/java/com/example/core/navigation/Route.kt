@@ -12,7 +12,4 @@ object Route {
 
     const val TRACKER_OVERVIEW = "tracker_overview"
     const val SEARCH = "tracker_search"
-
-    const val SETTINGS = "settings"
-    const val NEW_RECEIPT = "new_receipt"
 }

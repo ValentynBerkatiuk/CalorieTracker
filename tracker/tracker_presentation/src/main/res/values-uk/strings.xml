@@ -16,7 +16,7 @@
     <string name="error_height_cant_be_empty">Висота не може бути порожньою</string>
     <string name="error_weight_cant_be_empty">Вага не може бути порожньою</string>
     <string name="kcal">ккал</string>
-    <string name="carbs">Вуглеводи</string>
+    <string name="carbs">Вугл.</string>
     <string name="protein">Білки</string>
     <string name="fat">Жири</string>
     <string name="previous_day">Попередній день</string>
@@ -34,7 +34,7 @@
     <string name="snacks">Перекус</string>
     <string name="add_meal">Додати %s</string>
     <string name="add">Додати</string>
-    <string name="search">Пошук...</string>
+    <string name="search">Пошук…</string>
     <string name="today">Сьогодні</string>
     <string name="recent">Нещодавні</string>
     <string name="kcal_per_100g">%dккал / 100г</string>

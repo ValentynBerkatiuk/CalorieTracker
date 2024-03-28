@@ -15,9 +15,5 @@ class SettingsPreferences(
         sharedPreferences.edit().putBoolean(SettingsRepository.KEY_THEME, darkTheme).apply()
     }
 
-    override fun loadLocalizationInfo(): String {
-        return sharedPreferences.getString(SettingsRepository.KEY_LANGUAGE, SettingsRepository.DEFAULT_LANGUAGE) ?: SettingsRepository.DEFAULT_LANGUAGE
-    }
-
     override fun loadThemeInfo(): Boolean = sharedPreferences.getBoolean(SettingsRepository.KEY_THEME, SettingsRepository.DARK_THEME_BY_DEFAULT)
 }

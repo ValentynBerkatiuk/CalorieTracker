@@ -1,6 +1,5 @@
 package com.example.tracker_presentation.tracker_overview
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.core.domain.preferences.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

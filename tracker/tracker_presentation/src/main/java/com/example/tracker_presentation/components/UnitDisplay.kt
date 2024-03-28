@@ -3,8 +3,8 @@ package com.example.tracker_presentation.components
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,15 +19,15 @@ fun UnitDisplay(
     unit: String,
     modifier: Modifier = Modifier,
     amountTextSize: TextUnit = 20.sp,
-    amountTextColor: Color = MaterialTheme.colors.onBackground,
+    amountTextColor: Color = MaterialTheme.colorScheme.onBackground,
     unitTextSize: TextUnit = 14.sp,
-    unitColor: Color = MaterialTheme.colors.onBackground
+    unitColor: Color = MaterialTheme.colorScheme.onBackground
 ) {
     val spacing = LocalSpacing.current
     Row(modifier = modifier) {
         Text(
             text = amount.toString(),
-            style = MaterialTheme.typography.h1,
+            style = MaterialTheme.typography.displayLarge,
             fontSize = amountTextSize,
             color = amountTextColor,
             modifier = Modifier.alignBy(LastBaseline)
@@ -35,7 +35,7 @@ fun UnitDisplay(
         Spacer(modifier = Modifier.width(spacing.spaceExtraSmall))
         Text(
             text = unit,
-            style = MaterialTheme.typography.body1,
+            style = MaterialTheme.typography.bodyLarge,
             fontSize = unitTextSize,
             color = unitColor,
             modifier = Modifier.alignBy(LastBaseline)

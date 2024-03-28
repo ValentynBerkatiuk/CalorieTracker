@@ -1,8 +1,8 @@
 package com.example.tracker_presentation.components
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,10 +18,10 @@ fun NutrientInfo(
     unit: String,
     modifier: Modifier = Modifier,
     amountTextSize: TextUnit = 16.sp,
-    amountColor: Color = MaterialTheme.colors.onBackground,
+    amountColor: Color = MaterialTheme.colorScheme.onBackground,
     unitTextSize: TextUnit = 10.sp,
-    unitColor: Color = MaterialTheme.colors.onBackground,
-    nameTextStyle: TextStyle = MaterialTheme.typography.body1
+    unitColor: Color = MaterialTheme.colorScheme.onBackground,
+    nameTextStyle: TextStyle = MaterialTheme.typography.bodyLarge
 ) {
     Column(
         modifier = modifier,
@@ -37,7 +37,7 @@ fun NutrientInfo(
         )
         Text(
             text = name,
-            color = MaterialTheme.colors.onBackground,
+            color = MaterialTheme.colorScheme.onBackground,
             style = nameTextStyle,
             fontWeight = FontWeight.Light
         )

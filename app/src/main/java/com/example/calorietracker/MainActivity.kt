@@ -12,6 +12,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavType
@@ -51,7 +52,7 @@ class MainActivity: ComponentActivity() {
         val shouldShowOnboarding = preferences.loadShouldShowOnboarding()
 
         setContent {
-            var darkTheme by remember { mutableStateOf(themeViewModel.settingsData) }
+            var darkTheme by rememberSaveable { mutableStateOf(themeViewModel.settingsData) }
             CalorieTrackerTheme(darkTheme = darkTheme) {
                 val navController = rememberNavController()
                 val snackbarHostState = remember { SnackbarHostState() }

@@ -18,9 +18,9 @@ fun UnitDisplay(
     amount: Int,
     unit: String,
     modifier: Modifier = Modifier,
-    amountTextSize: TextUnit = 20.sp,
+    amountTextSize: TextUnit = 16.sp,
     amountTextColor: Color = MaterialTheme.colorScheme.onBackground,
-    unitTextSize: TextUnit = 14.sp,
+    unitTextSize: TextUnit = 10.sp,
     unitColor: Color = MaterialTheme.colorScheme.onBackground
 ) {
     val spacing = LocalSpacing.current

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -55,7 +56,12 @@ fun GoalScreen(
                 style = MaterialTheme.typography.displaySmall
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
-            Row {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(end = spacing.spaceMedium),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 SelectableButton(
                     text = stringResource(id = R.string.lose),
                     isSelected = viewModel.selectedGoalType is GoalType.LoseWeight,

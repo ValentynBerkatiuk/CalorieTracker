@@ -94,7 +94,7 @@ fun NutrientsHeader(
             TrackerBarInfo(
                 value = state.totalCarbs,
                 goal = state.carbsGoal,
-                name = stringResource(id = R.string.carbs),
+                name = "Вугл.",
                 color = CarbColor,
                 modifier = Modifier.size(90.dp)
             )
